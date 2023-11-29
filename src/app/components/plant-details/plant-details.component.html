@@ -1,0 +1,33 @@
+<p-dialog (onHide)="onHide()" [(visible)]="visible"  [modal]="true" [style]="{ width: '70vw', height: '600px' }" [resizable]="false">
+    <ng-template pTemplate="header">
+        <div class="grid grid-rows-2">
+            <div class="w-full">
+                <span class="text-xl font-semibold">{{plantSelected?.data?.common_name}}</span>
+            </div>
+            <div class="w-full">
+                <span class="font-bold text-sm">{{plantSelected?.data?.scientific_name}}</span>
+            </div>
+        </div>
+        
+    </ng-template>
+
+
+    <div class="grid grid-cols-7 gap-5">
+        <div class="m-0 h-96 col-span-4 border border-green-300 rounded-md p-3">
+            <p-image [src]="plantSelected?.data?.image_url" alt="Image" class="rounded-md"></p-image>
+        </div>
+        <div class="col-span-3 border border-blue-300 p- rounded-md p-3">
+            <p><span class="font-bold">Family:</span> {{plantSelected?.data?.family?.name}}</p>
+            <p><span class="font-bold">Author:</span> {{plantSelected?.data?.author}}</p>
+            <p><span class="font-bold">Bibliography:</span> {{plantSelected?.data?.bibliography}}</p>
+            <p><span class="font-bold">Year:</span> {{plantSelected?.data?.year}}</p>
+            <p><span class="font-bold">Slug:</span> {{plantSelected?.data?.slug}}</p>
+            <p><span class="font-bold">Observations:</span> {{plantSelected?.data?.observations}}</p>
+        </div>
+    </div>
+   
+    <ng-template pTemplate="footer">
+        <p-button icon="pi pi-check" (click)="previousPlant()" label="Previus" styleClass="p-button-text"></p-button>
+        <p-button icon="pi pi-check" (click)="nextPlant()" label="Next" styleClass="p-button-text"></p-button>
+    </ng-template>
+</p-dialog>

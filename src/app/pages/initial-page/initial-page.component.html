@@ -1,6 +1,38 @@
-<p class="text-gray-900">initial-page works!</p>
+<div class="header w-full h-96 border border-black flex flex-col justify-center items-center">
+    <div>
+        <img src="../../../assets/pc-svgrepo-com (2).svg" alt="">
+    </div>
+    <div class="w-full h-1/4 text-xl">
+        <p class="text-center text-white">Luis Abelardo Jara Hillpa</p>
+    </div>
+    <div class="w-full h-1/3 text-xl">
+        <p class="text-center text-white">Desarrollador FullSatck</p>
+    </div>
+</div>
+
+<div class="body mt-6">
+    <p class="text-center">PORTAFOLIO</p>
+</div>
+
+<div class="grid grid-cols-3 gap-4 px-3">
+    <div *ngFor="let plant of plantList" class="border border-black rounded-lg">
+      <p-card header="{{ plant.common_name || plant.synonyms[0] || '' }}">
+        <div *ngIf="plant.image_url" class="m-0 h-72">
+          <p-image [src]="plant.image_url" alt="Image" class="rounded-md"></p-image>
+        </div>
+
+        <div *ngIf="!plant.image_url" class="m-0 h-72 flex justify-center items-center">
+          <p class="transform rotate-45">No Image</p>
+        </div>
+
+        <div class="mt-2 flex justify-center items-center">
+          <p-button label="Detalles" (click)="onClickPlant(plant)"></p-button>
+        </div>
+      </p-card>
+    </div>
+</div>
+
+<p-paginator [first]="first" [rows]="1" [totalRecords]="12" (onPageChange)="onPageChange($event)" [showJumpToPageDropdown]="true" [showPageLinks]="false"></p-paginator>
 
 
-<div>Header</div>
-<div>Body</div>
-<div>Footer</div>
+<app-plant-details [visible]="visible" [plantSelected]="plantSelected"></app-plant-details>
