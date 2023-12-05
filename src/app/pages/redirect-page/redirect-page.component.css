@@ -1,0 +1,8 @@
+::ng-deep .p-tabmenu .p-tabmenu-nav .p-tabmenuitem .p-menuitem-link{
+    background-color: white;
+}
+
+::ng-deep .p-tabmenu .p-tabmenu-nav .p-tabmenuitem.p-highlight .p-menuitem-link{
+    background-color: rgb(141, 255, 141);
+    color: black;
+}

@@ -6,3 +6,24 @@
 ::ng-deep .p-card .p-card-body{
     padding-bottom: 0;
 }
+
+::ng-deep .p-dialog-draggable .p-dialog-header{
+    background-color: rgb(119, 194, 119);
+}
+
+::ng-deep .p-dialog .p-dialog-footer button {
+    background-color: rgb(119, 194, 119);
+    color: black;
+}
+
+::ng-deep .p-dialog .p-dialog-header{
+    color: black;
+}
+
+::ng-deep .p-paginator>.p-button{
+    background-color: #1764df !important;
+}
+
+::ng-deep .p-dialog .p-dialog-content{
+    padding: 2rem 1.5rem 0rem 1.5rem;
+}

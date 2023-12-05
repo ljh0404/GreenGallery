@@ -1,0 +1,7 @@
+::ng-deep .p-card .p-card-body{
+    background: linear-gradient(to bottom, rgb(119, 194, 119), rgb(212, 245, 219));
+}
+
+::ng-deep .p-card .p-card-body{
+    border-radius: 0.5rem;
+}

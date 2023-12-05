@@ -1,0 +1,34 @@
+<div class="flex items-center justify-center rounded-md">
+    <div class="body my-6 px-6 py-4 bg-green-300 w-1/4">
+      <p class="text-center font-extrabold text-3xl">SEARCH PAGE</p>
+    </div>
+</div>
+  
+<div class="px-6">
+    <span class="p-input-icon-left">
+        <i class="pi pi-search"></i>
+        <input type="text" pInputText [(ngModel)]="searchText"  placeholder="Buscar por nombre común"/>
+        <p-button label="Search" (click)="onClickSearch()"></p-button>
+    </span>
+</div>
+
+<div class="grid grid-cols-3 gap-6 py-4 px-6">
+    <div *ngFor="let plant of searchResult" class="rounded-md my-3">
+      <p-card header="{{ plant.common_name || plant.synonyms[0] || '' }}">
+        <div *ngIf="plant.image_url" class="m-0 h-72">
+          <p-image [src]="plant.image_url" alt="Image"></p-image>
+        </div>
+
+        <div *ngIf="!plant.image_url" class="m-0 h-72 flex justify-center items-center">
+          <p class="transform rotate-45">No Image</p>
+        </div>
+        
+        <div class="mt-4 grid grid-cols-1 gap-3 justify-items-center">
+          <!-- <p-button label="Favorite" (click)="addFavorites(plant)"></p-button> -->
+          <p-button label="Details" (click)="onClickPlant(plant)"></p-button>
+        </div>
+      </p-card>
+    </div>
+</div>
+
+<app-plant-details [visible]="visible" [plantSelected]="plantSelected" [searchButton]="searchButton"></app-plant-details>

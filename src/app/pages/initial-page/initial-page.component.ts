@@ -27,6 +27,9 @@ export class InitialPageComponent {
   previousIndex!: number; 
   nextLink!: string;
   previousLink!: string;
+  searchText!: string;
+  results: any[] = [];
+  initialButton: boolean = true;
 
   constructor(private generalService: GeneralServiceService){}
   
@@ -38,7 +41,7 @@ export class InitialPageComponent {
     this.generalService.obtenerDatos((this.page+1).toString()).subscribe((data) => {
       this.object = data;
       this.plantList = this.object.data;
-      console.log(this.plantList);
+      this.results = [...this.plantList];
     });
   }
 
@@ -65,5 +68,15 @@ export class InitialPageComponent {
     this.first = event.first;
     this.page = event.page;
     this.getData();
+  }
+
+  addFavorites(plant: Datum){
+    this.generalService.addFavorites(plant);
+  }
+
+  buscarPorCommonName() {
+    this.results = this.plantList.filter(
+      elemento => elemento.common_name.toLowerCase().includes(this.searchText.toLowerCase())
+    );
   }
 }

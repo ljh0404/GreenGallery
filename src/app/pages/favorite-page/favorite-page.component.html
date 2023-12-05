@@ -1,0 +1,26 @@
+<div class="flex items-center justify-center rounded-md">
+  <div class="body my-6 px-6 py-4 bg-green-300 w-1/4">
+    <p class="text-center font-extrabold text-3xl">FAVORITES</p>
+  </div>
+</div>
+
+
+<div class="grid grid-cols-3 gap-6 py-4 px-6">
+  <div *ngFor="let plant of plantList" class="rounded-md my-3">
+    <p-card header="{{ plant.common_name || plant.synonyms[0] || '' }}">
+      <div *ngIf="plant.image_url" class="m-0 h-72">
+        <p-image [src]="plant.image_url" alt="Image"></p-image>
+      </div>
+
+      <div *ngIf="!plant.image_url" class="m-0 h-72 flex justify-center items-center">
+        <p class="transform rotate-45">No Image</p>
+      </div>
+      
+      <div class="mt-4 grid grid-cols-1 justify-items-center">
+        <p-button label="Details" (click)="onClickPlant(plant)"></p-button>
+      </div>
+    </p-card>
+  </div>
+</div>
+
+<app-plant-details [visible]="visible" [plantSelected]="plantSelected" [favoriteButton]="favoriteButton"></app-plant-details>
