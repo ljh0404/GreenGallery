@@ -18,6 +18,10 @@ import { InputTextModule } from 'primeng/inputtext';
 import { SearchPageComponent } from './pages/search-page/search-page.component';
 import { FamilyPageComponent } from './pages/family-page/family-page.component';
 import { GenusPageComponent } from './pages/genus-page/genus-page.component';
+import { PlantsByGenusComponent } from './pages/plants-by-genus/plants-by-genus.component';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { PaginatorComponent } from './components/paginator/paginator.component';
+import { InputNumberModule } from 'primeng/inputnumber';
 
 @NgModule({
   declarations: [
@@ -28,7 +32,10 @@ import { GenusPageComponent } from './pages/genus-page/genus-page.component';
     FavoritePageComponent,
     SearchPageComponent,
     FamilyPageComponent,
-    GenusPageComponent
+    GenusPageComponent,
+    PlantsByGenusComponent,
+    DashboardComponent,
+    PaginatorComponent
   ],
   imports: [
     HttpClientModule,
@@ -41,9 +48,10 @@ import { GenusPageComponent } from './pages/genus-page/genus-page.component';
     DialogModule,
     PaginatorModule,
     TabMenuModule,
-    InputTextModule
+    InputTextModule,
+    InputNumberModule
   ],
-  providers: [InitialPageComponent, FavoritePageComponent, SearchPageComponent],
+  providers: [InitialPageComponent, FavoritePageComponent, SearchPageComponent, FamilyPageComponent, PaginatorComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,10 +1,12 @@
 import { Injectable, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Datum, RootObject } from '../interfaces/interfaces';
+import { Datum, DatumLinks, RootObject } from '../interfaces/interfaces';
 import { Observable } from 'rxjs';
 import { RootObject2 } from '../interfaces/plantInterface';
 import { SearchObject } from '../interfaces/searchInterface';
 import { FamilyObject } from '../interfaces/familyInterface';
+import { GenusObject } from '../interfaces/genusInterface';
+import { PlantsObject } from '../interfaces/plantsByGenusInterface';
 
 @Injectable({
   providedIn: 'root'
@@ -17,11 +19,13 @@ export class GeneralServiceService {
 
   private searchUrl = '/api/v1/plants/search?token=dFyYL65yF8C_M9Y7ArXytbxj5olI0-Sw7wfmy5klD5o&q=';
 
-  private familiesUrl = '/api/v1/families?token=dFyYL65yF8C_M9Y7ArXytbxj5olI0-Sw7wfmy5klD5o&page=30';
+  private familiesUrl = '/api/v1/families?token=dFyYL65yF8C_M9Y7ArXytbxj5olI0-Sw7wfmy5klD5o&page=';
+
+  private genusUrl = '?token=dFyYL65yF8C_M9Y7ArXytbxj5olI0-Sw7wfmy5klD5o&page='
 
   constructor(private http: HttpClient) { }
 
-  obtenerDatos(pageNumber: string): Observable<RootObject> {
+  obtenerDatos(pageNumber: number): Observable<RootObject> {
     return this.http.get<RootObject>(this.apiUrl+ pageNumber);
   }
 
@@ -29,13 +33,22 @@ export class GeneralServiceService {
     return this.http.get<RootObject2>(specie + this.apiUrl_specie)
   }
 
-  searchData(seachText:string) : Observable<SearchObject> {
-    return this.http.get<SearchObject>(this.searchUrl+seachText);
+  searchData(seachText:string, page: number) : Observable<SearchObject> {
+    return this.http.get<SearchObject>(this.searchUrl+seachText+'&page='+ page);
   }
 
-  getAllFamilies() :Observable<FamilyObject> {
-    return this.http.get<FamilyObject>(this.familiesUrl);
+  getAllFamilies(page: number) :Observable<FamilyObject> {
+    return this.http.get<FamilyObject>(this.familiesUrl+page);
   }
+
+  getGenusByFamily(family: string, page: number) : Observable<GenusObject> {
+    return this.http.get<GenusObject>(family + this.genusUrl+ page);
+  } 
+
+  getPlantsByGenus(genus: string, page: number) :Observable<PlantsObject>{
+    return this.http.get<PlantsObject>(genus + this.genusUrl+ page);
+  }
+
 
   private favorites = signal<Datum[]>([]);
 

@@ -1,0 +1,9 @@
+<div class="flex items-center justify-center">
+    <p-button icon="pi pi-angle-double-left" (click)="onClickAllLeft()"></p-button>
+    <p-button icon="pi pi-angle-left" (click)="onClickLeft()" [disabled]="pageSelected == 1"></p-button>
+    <input type="number" pInputText [(ngModel)]="pageSelected" (blur)="handleBlur()" (ngModelChange)="handleInputChange()"/>
+    of 
+    <input readonly type="text" pInputText [(ngModel)]="lastPage"/>
+    <p-button icon="pi pi-angle-right" (click)="onClickRight()" [disabled]="pageSelected == lastPage"></p-button>
+    <p-button icon="pi pi-angle-double-right" (click)="onClickAllRight();"></p-button>    
+</div>

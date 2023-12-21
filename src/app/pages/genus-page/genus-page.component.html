@@ -1,1 +1,23 @@
-<p>genus-page works!</p>
+<div class="flex items-center justify-center rounded-md">
+  <div class="flex justify-center items-center w-full mt-6">
+    <p class="cloud-text cloud-title">Genus by Family</p>
+  </div>
+</div>
+
+<div class="flex items-center justify-center rounded-md">
+  <div class="flex justify-center items-center w-full">
+    <p class="cloud-text cloud-title">Family: {{familyName}}</p>
+  </div>
+</div>
+
+<div class="grid grid-cols-3 gap-6 py-4 px-6">
+  <div *ngFor="let genus of genusData?.data" class="rounded-md my-3">
+    <p-card header="{{ genus?.name || '' }}">
+      <div class="mt-4 grid grid-cols-1 gap-3 justify-items-center items-center">
+        <p-button label="See Plants" (click)="onClickGenus(genus.slug)"></p-button>
+      </div>
+    </p-card>
+  </div>
+</div>
+
+<app-paginator [lastPage]="lastPage!" [pageSelected]="pageSelected!" (sendMessageEvent)="receiveMessageFromChild($event)"></app-paginator>

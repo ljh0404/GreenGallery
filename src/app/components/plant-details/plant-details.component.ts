@@ -28,38 +28,42 @@ export class PlantDetailsComponent {
   }
 
   nextPlant(){
+    console.log('next',this.initialPage.nextLink);
+    console.log('previous',this.initialPage.previousLink);
     this.generalService.getSpecieData(this.initialPage.nextLink).subscribe((data)=> {
       this.plantSelected = data;
       this.initialPage.nextIndex = this.initialPage.nextIndex+1
       this.initialPage.previousIndex = this.initialPage.previousIndex+1;
 
       if (this.initialPage.previousIndex == -1){
-        this.initialPage.previousIndex = this.initialPage.plantList.length-1;
+        this.initialPage.previousIndex = this.initialPage.plantList.data.length-1;
       }
-      if (this.initialPage.nextIndex == this.initialPage.plantList.length){
+      if (this.initialPage.nextIndex == this.initialPage.plantList.data.length){
         this.initialPage.nextIndex = 0;
       }
 
-      this.initialPage.nextLink = this.initialPage.plantList[this.initialPage.nextIndex].links.plant;
-      this.initialPage.previousLink = this.initialPage.plantList[this.initialPage.previousIndex].links.plant;
+      this.initialPage.nextLink = this.initialPage.plantList.data[this.initialPage.nextIndex]?.links.plant;
+      this.initialPage.previousLink = this.initialPage.plantList.data[this.initialPage.previousIndex]?.links.plant;
     })
   }
   
   previousPlant(){
+    console.log('next',this.initialPage.nextLink);
+    console.log('previous',this.initialPage.previousLink);
     this.generalService.getSpecieData(this.initialPage.previousLink).subscribe((data)=> {
       this.plantSelected = data;
       this.initialPage.nextIndex = this.initialPage.nextIndex - 1
       this.initialPage.previousIndex = this.initialPage.previousIndex - 1;
 
       if (this.initialPage.previousIndex == -1){
-        this.initialPage.previousIndex = this.initialPage.plantList.length-1;
+        this.initialPage.previousIndex = this.initialPage.plantList.data.length - 1;
       }
-      if (this.initialPage.nextIndex == this.initialPage.plantList.length){
+      if (this.initialPage.nextIndex == this.initialPage.plantList.data.length){
         this.initialPage.nextIndex = 0;
       }
 
-      this.initialPage.nextLink = this.initialPage.plantList[this.initialPage.nextIndex].links.plant;
-      this.initialPage.previousLink = this.initialPage.plantList[this.initialPage.previousIndex].links.plant;
+      this.initialPage.nextLink = this.initialPage.plantList.data[this.initialPage.nextIndex]?.links.plant;
+      this.initialPage.previousLink = this.initialPage.plantList.data[this.initialPage.previousIndex]?.links.plant;
     })
   }
 }

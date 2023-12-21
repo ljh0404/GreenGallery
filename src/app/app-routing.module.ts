@@ -5,6 +5,9 @@ import { RedirectPageComponent } from './pages/redirect-page/redirect-page.compo
 import { FavoritePageComponent } from './pages/favorite-page/favorite-page.component';
 import { SearchPageComponent } from './pages/search-page/search-page.component';
 import { FamilyPageComponent } from './pages/family-page/family-page.component';
+import { GenusPageComponent } from './pages/genus-page/genus-page.component';
+import { PlantsByGenusComponent } from './pages/plants-by-genus/plants-by-genus.component';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
 
 const routes: Routes = [
   {
@@ -18,7 +21,7 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: 'initial-page',
+        redirectTo: 'dashboard',
         pathMatch: 'full',
       },
       {
@@ -37,6 +40,18 @@ const routes: Routes = [
         path: 'family-page',
         component: FamilyPageComponent,
       },
+      {
+        path: 'genusByFamily-page',
+        component: GenusPageComponent,
+      },
+      {
+        path: 'plantsByGenus-page',
+        component: PlantsByGenusComponent,
+      },
+      {
+        path: 'dashboard',
+        component: DashboardComponent,
+      }
     ]
   }
 ];

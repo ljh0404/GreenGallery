@@ -12,12 +12,12 @@ export class RedirectPageComponent {
 
     ngOnInit() {
         this.items = [
-            { label: 'Home', icon: 'pi pi-fw pi-home', routerLink:'/redirect-page/initial-page'},
+            { label: 'Dashboard', icon: 'pi pi-fw pi-home', routerLink:'/redirect-page/dashboard'},
+            { label: 'Green Gallery', icon: 'pi pi-fw pi-home', routerLink:'/redirect-page/initial-page'},
             { label: 'Favorites', icon: 'pi pi-fw pi-calendar', routerLink:'/redirect-page/favorite-page' },
             { label: 'Search Section', icon: 'pi pi-fw pi-pencil', routerLink:'/redirect-page/search-page' },
             { label: 'Families', icon: 'pi pi-fw pi-file', routerLink:'/redirect-page/family-page'},
-            { label: 'Settings', icon: 'pi pi-fw pi-cog' }
         ];
-        this.itemSelected = this.items[0];
+        this.itemSelected = this.items[1];
     }
 }

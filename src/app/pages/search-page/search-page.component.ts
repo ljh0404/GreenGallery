@@ -3,6 +3,7 @@ import { RootObject2 } from 'src/app/interfaces/plantInterface';
 import { Datum } from 'src/app/interfaces/searchInterface';
 import { SearchObject } from 'src/app/interfaces/searchInterface';
 import { GeneralServiceService } from 'src/app/services/general-service.service';
+import { PersistenceService } from 'src/app/services/persistence.service';
 
 @Component({
   selector: 'app-search-page',
@@ -11,17 +12,29 @@ import { GeneralServiceService } from 'src/app/services/general-service.service'
 })
 export class SearchPageComponent {
   searchText!: string;
-  searchResult: Datum[] = [];
+  searchResult!: SearchObject;
   plantSelected!: RootObject2;
   visible: boolean = false;
   searchButton: boolean = true;
+  lastPage!: number;
+  pageSelected!: number;
 
-  constructor(private generalService: GeneralServiceService){}
+  constructor(private generalService: GeneralServiceService, private persistenceService: PersistenceService){}
+
+  ngOnInit(){
+    if (this.persistenceService.getResultSearch() != undefined){
+      this.searchResult = this.persistenceService.getResultSearch();
+      this.searchText = this.persistenceService.getSearchText();
+    }
+  }
 
   onClickSearch(){
-    this.generalService.searchData(this.searchText).subscribe(data => {
-      this.searchResult = data.data!;
-      console.log(this.searchResult);
+    this.generalService.searchData(this.searchText,1).subscribe(data => {
+      this.searchResult = data;
+      this.pageSelected = 1;
+      this.lastPage = parseInt(this.extractLastPage(this.searchResult.links.last)!);
+      this.persistenceService.setResultSearch(this.searchResult);
+      this.persistenceService.setSearchText(this.searchText);
     });
   }
 
@@ -29,18 +42,24 @@ export class SearchPageComponent {
     this.generalService.getSpecieData(plant.links.plant).subscribe((data)=> {
       this.plantSelected = data;
       this.visible = true;
-      // this.nextIndex = this.plantList.findIndex( element => element.id == plant.id) + 1 ;
-      // this.previousIndex = this.plantList.findIndex( element => element.id == plant.id) - 1 ;
-
-      // if (this.previousIndex == -1){
-      //   this.previousIndex = this.plantList.length-1;
-      // }
-      // if (this.nextIndex == this.plantList.length){
-      //   this.nextIndex = 0;
-      // }
-
-      // this.nextLink = this.plantList[this.nextIndex].links.plant;
-      // this.previousLink = this.plantList[this.previousIndex].links.plant;
     })
+  }
+
+  extractLastPage(cadena: string) {
+    const partes = cadena.split('&');
+    const valorDespuesDeIgual = partes[0];
+    const parts2 = valorDespuesDeIgual.split('=')
+    return parts2[1];
+  }
+
+  receiveMessageFromChild(page: number) {
+    this.pageSelected = page;
+    
+    this.generalService.searchData(this.searchText, page).subscribe(data => {
+      this.searchResult = data;
+      this.lastPage = parseInt(this.extractLastPage(this.searchResult.links.last)!);
+      this.persistenceService.setResultSearch(this.searchResult);
+      this.persistenceService.setSearchText(this.searchText);
+    });
   }
 }

@@ -1,19 +1,19 @@
 <div class="flex items-center justify-center rounded-md">
-    <div class="body my-6 px-6 py-4 bg-green-300 w-1/4">
-      <p class="text-center font-extrabold text-3xl">SEARCH PAGE</p>
-    </div>
+  <div class="flex justify-center items-center w-full mt-6">
+    <p class="cloud-text cloud-title">Search Page</p>
+  </div>
 </div>
   
-<div class="px-6">
-    <span class="p-input-icon-left">
+<div class="px-6 w-full flex justify-center items-center">
+    <span class="w-full center-span">
         <i class="pi pi-search"></i>
-        <input type="text" pInputText [(ngModel)]="searchText"  placeholder="Buscar por nombre común"/>
+        <input type="text" pInputText [(ngModel)]="searchText" placeholder="Buscar por nombre común" class="w-8/12"/>
         <p-button label="Search" (click)="onClickSearch()"></p-button>
     </span>
 </div>
 
 <div class="grid grid-cols-3 gap-6 py-4 px-6">
-    <div *ngFor="let plant of searchResult" class="rounded-md my-3">
+    <div *ngFor="let plant of searchResult?.data" class="rounded-md my-3">
       <p-card header="{{ plant.common_name || plant.synonyms[0] || '' }}">
         <div *ngIf="plant.image_url" class="m-0 h-72">
           <p-image [src]="plant.image_url" alt="Image"></p-image>
@@ -29,6 +29,14 @@
         </div>
       </p-card>
     </div>
+</div>
+
+<div class="flex justify-center items-center">
+  <img src="../../../assets/hoja.svg" alt="Descripción del SVG" width="350" height="350">
+</div>
+
+<div *ngIf="searchText">
+  <app-paginator [lastPage]="lastPage!" [pageSelected]="pageSelected!" (sendMessageEvent)="receiveMessageFromChild($event)"></app-paginator>
 </div>
 
 <app-plant-details [visible]="visible" [plantSelected]="plantSelected" [searchButton]="searchButton"></app-plant-details>
