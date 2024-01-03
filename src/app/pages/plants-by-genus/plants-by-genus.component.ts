@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { RootObject2 } from 'src/app/interfaces/plantInterface';
 import { Datum, PlantsObject } from 'src/app/interfaces/plantsByGenusInterface';
 import { GeneralServiceService } from 'src/app/services/general-service.service';
 
@@ -15,6 +16,8 @@ export class PlantsByGenusComponent {
   plants:any[] = [];
   lastPage!: number;
   pageSelected!: number;
+  plantSelected!: RootObject2;
+  visible: boolean = false;
 
   constructor(private generalService: GeneralServiceService, private router: Router, private activateRoute: ActivatedRoute){}
 
@@ -28,7 +31,7 @@ export class PlantsByGenusComponent {
           this.plants = data.data;
           this.lastPage = parseInt(this.extractLastPage(this.plantsData.links.last)!);
           this.pageSelected = 1;
-          console.log(this.plantsData);
+          console.log(this.plants);
         })
       }
     )
@@ -44,6 +47,13 @@ export class PlantsByGenusComponent {
     this.generalService.getPlantsByGenus('/api/v1/genus/'+this.genusName+'/plants', page).subscribe(data => {
       this.plantsData = data;
       this.plants = data.data;
+    })
+  }
+
+  onClickPlant(plant: any){
+    this.generalService.getSpecieData(plant.links.plant).subscribe((data)=> {
+      this.plantSelected = data;
+      this.visible = true;
     })
   }
 }

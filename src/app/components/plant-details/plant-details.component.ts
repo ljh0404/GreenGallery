@@ -3,6 +3,7 @@ import { Datum } from 'src/app/interfaces/interfaces';
 import { RootObject2 } from 'src/app/interfaces/plantInterface';
 import { FavoritePageComponent } from 'src/app/pages/favorite-page/favorite-page.component';
 import { InitialPageComponent } from 'src/app/pages/initial-page/initial-page.component';
+import { PlantsByGenusComponent } from 'src/app/pages/plants-by-genus/plants-by-genus.component';
 import { SearchPageComponent } from 'src/app/pages/search-page/search-page.component';
 import { GeneralServiceService } from 'src/app/services/general-service.service';
 
@@ -19,12 +20,13 @@ export class PlantDetailsComponent {
   @Input() favoriteButton!: boolean;
   @Input() initialButton!: boolean;
 
-  constructor(private initialPage: InitialPageComponent, private generalService: GeneralServiceService, private favoritePage: FavoritePageComponent, private searchPage: SearchPageComponent){}
+  constructor(private initialPage: InitialPageComponent, private generalService: GeneralServiceService, private favoritePage: FavoritePageComponent, private searchPage: SearchPageComponent, private plantsByGenusPage: PlantsByGenusComponent){}
 
   onHide() {
     this.initialPage.visible = false;
     this.favoritePage.visible = false;
     this.searchPage.visible = false;
+    this.plantsByGenusPage.visible = false;
   }
 
   nextPlant(){

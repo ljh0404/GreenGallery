@@ -14,7 +14,7 @@
 
 <div class="grid grid-cols-3 gap-6 py-4 px-6">
     <div *ngFor="let plant of searchResult?.data" class="rounded-md my-3">
-      <p-card header="{{ plant.common_name || plant.synonyms[0] || '' }}">
+      <p-card header="{{ plant.common_name || plant.synonyms[0] || plant.scientific_name || '' }}">
         <div *ngIf="plant.image_url" class="m-0 h-72">
           <p-image [src]="plant.image_url" alt="Image"></p-image>
         </div>
@@ -31,7 +31,8 @@
     </div>
 </div>
 
-<div class="flex justify-center items-center">
+<div *ngIf="searchResult?.data?.length == 0" class="flex justify-center items-center">
+  <div><p>No found results</p></div>
   <img src="../../../assets/hoja.svg" alt="Descripción del SVG" width="350" height="350">
 </div>
 

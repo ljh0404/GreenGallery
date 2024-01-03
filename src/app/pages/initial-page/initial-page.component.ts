@@ -35,22 +35,35 @@ export class InitialPageComponent {
   constructor(private generalService: GeneralServiceService, private persistenceService: PersistenceService){}
   
   ngOnInit(){
-    if (this.persistenceService.getInitialPage()){
-      this.getPersistenceData();  
-    }
-    else{
-      this.getData();
-    }
+    this.generalService.claimAuthorization('https://greengallery-b9ad4.web.app/', '')
+      .subscribe(
+        (response) => {
+          console.log(response);
+        },
+        (error) => {
+          console.error(error);
+        }
+      );
+    // if (this.persistenceService.getInitialPage()){
+    //   this.getPersistenceData();  
+    // }
+    // else{
+    //   this.getData();
+    // }
   }
 
   getData(){
-    this.generalService.obtenerDatos(1).subscribe((data) => {
-      this.plantList = data;
-      this.lastPage = parseInt(this.extractLastPage(this.plantList.links.last)!);
-      this.pageSelected = 1;
-      this.persistenceService.setInitialNumberPage(this.pageSelected);
-      this.persistenceService.setInitialPage(this.plantList);
-    });
+    this.generalService.obtenerDatos(1).subscribe(
+      (data) => {
+        this.plantList = data;
+        this.lastPage = parseInt(this.extractLastPage(this.plantList.links.last)!);
+        this.pageSelected = 1;
+        this.persistenceService.setInitialNumberPage(this.pageSelected);
+        this.persistenceService.setInitialPage(this.plantList);
+      },
+      (error) => {
+        console.error('Error en la solicitud:', error);
+      });
   }
 
   getPersistenceData(){

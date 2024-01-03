@@ -13,7 +13,7 @@
 
 <div class="grid grid-cols-3 gap-6 py-4 px-6">
     <div *ngFor="let plant of plants" class="rounded-md my-3">
-      <p-card header="{{ plant.common_name || plant.synonyms[0] || '' }}">
+      <p-card header="{{  plant.common_name || plant.synonyms[0] || plant.scientific_name || ''  }}">
         <div *ngIf="plant.image_url" class="m-0 h-72">
           <p-image [src]="plant.image_url" alt="Image"></p-image>
         </div>
@@ -23,11 +23,13 @@
         </div>
         
         <div class="mt-4 grid grid-cols-2 gap-3 justify-items-center items-center">
-          <!-- <p-button label="Favorite" (click)="addFavorites(plant)"></p-button>
-          <p-button label="Details" (click)="onClickPlant(plant)"></p-button> -->
+          <!-- <p-button label="Favorite" (click)="addFavorites(plant)"></p-button> -->
+          <p-button label="Details" (click)="onClickPlant(plant)"></p-button>
         </div>
       </p-card>
     </div>
 </div>
 
-<app-paginator [lastPage]="lastPage!" [pageSelected]="pageSelected!" (sendMessageEvent)="receiveMessageFromChild($event)"></app-paginator>
+<app-plant-details [visible]="visible" [plantSelected]="plantSelected"></app-plant-details>
+
+<app-paginator  [lastPage]="lastPage!" [pageSelected]="pageSelected!" (sendMessageEvent)="receiveMessageFromChild($event)"></app-paginator>

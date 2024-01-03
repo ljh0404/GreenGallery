@@ -8,7 +8,7 @@
 
   <div class="grid grid-cols-3 gap-6 py-4 px-6">
       <div *ngFor="let plant of plantList?.data" class="rounded-md my-3 border-2 border-white shadow-xl">
-        <p-card header="{{ plant.common_name || plant.synonyms[0] || '' }}">
+        <p-card header="{{ plant.common_name || plant.synonyms[0] || plant.scientific_name || '' }}">
           <div *ngIf="plant.image_url" class="m-0 h-72 shadow-2xl border-2 border-gray-400 rounded-md">
             <p-image [src]="plant.image_url" alt="Image"></p-image>
           </div>

@@ -1,7 +1,7 @@
 {
-    "/api": {
-      "target": "https://trefle.io",
-      "secure": false,
+  "/api": {
+    "target": "https://trefle.io",
+    "secure": false,
       "changeOrigin": true
-    }
   }
+}

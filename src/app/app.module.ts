@@ -51,7 +51,7 @@ import { InputNumberModule } from 'primeng/inputnumber';
     InputTextModule,
     InputNumberModule
   ],
-  providers: [InitialPageComponent, FavoritePageComponent, SearchPageComponent, FamilyPageComponent, PaginatorComponent],
+  providers: [InitialPageComponent, FavoritePageComponent, SearchPageComponent, FamilyPageComponent, PaginatorComponent, PlantsByGenusComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
