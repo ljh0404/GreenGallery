@@ -14,6 +14,7 @@ export class GenusPageComponent {
   genusData!: GenusObject;
   lastPage!: number;
   pageSelected!: number;
+  isLoading : boolean = false;
 
   constructor(private activateRoute: ActivatedRoute, private generalService: GeneralServiceService, private router: Router){}
 
@@ -21,8 +22,9 @@ export class GenusPageComponent {
     this.activateRoute.queryParams.subscribe(
       (params: Params) => {
         this.familyName = params['family'];
-
+        this.isLoading = true;
         this.generalService.getGenusByFamily('/api/v1/families/'+this.familyName+'/genus', 1).subscribe(data => {
+          this.isLoading = false;
           this.genusData = data;
           this.lastPage = parseInt(this.extractLastPage(this.genusData.links.last)!);
           this.pageSelected = 1;
@@ -47,7 +49,9 @@ export class GenusPageComponent {
 
   receiveMessageFromChild(page: number) {
     this.pageSelected = page;
+    this.isLoading = true;
     this.generalService.getGenusByFamily('/api/v1/families/'+this.familyName+'/genus', page).subscribe(data => {
+      this.isLoading = false;
       this.genusData = data;
     })
   }

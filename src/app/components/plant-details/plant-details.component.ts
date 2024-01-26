@@ -19,6 +19,8 @@ export class PlantDetailsComponent {
   @Input() searchButton!: boolean;
   @Input() favoriteButton!: boolean;
   @Input() initialButton!: boolean;
+  visible2: boolean = false;
+
 
   constructor(private initialPage: InitialPageComponent, private generalService: GeneralServiceService, private favoritePage: FavoritePageComponent, private searchPage: SearchPageComponent, private plantsByGenusPage: PlantsByGenusComponent){}
 
@@ -67,5 +69,9 @@ export class PlantDetailsComponent {
       this.initialPage.nextLink = this.initialPage.plantList.data[this.initialPage.nextIndex]?.links.plant;
       this.initialPage.previousLink = this.initialPage.plantList.data[this.initialPage.previousIndex]?.links.plant;
     })
+  }
+
+  onClick(){
+    this.visible2 = true;
   }
 }

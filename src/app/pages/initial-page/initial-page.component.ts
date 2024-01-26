@@ -3,6 +3,8 @@ import { Datum, RootObject } from 'src/app/interfaces/interfaces';
 import { RootObject2 } from 'src/app/interfaces/plantInterface';
 import { GeneralServiceService } from 'src/app/services/general-service.service';
 import { PersistenceService } from 'src/app/services/persistence.service';
+import { MessageService } from 'primeng/api';
+
 
 interface PageEvent {
   first: number;
@@ -31,28 +33,30 @@ export class InitialPageComponent {
   initialButton: boolean = true;
   lastPage!: number;
   pageSelected!: number;
+  isLoading: boolean = false;
 
-  constructor(private generalService: GeneralServiceService, private persistenceService: PersistenceService){}
+  constructor(private generalService: GeneralServiceService, private persistenceService: PersistenceService, private messageService: MessageService){}
   
   ngOnInit(){
-    this.generalService.claimAuthorization('https://greengallery-b9ad4.web.app/', '')
-      .subscribe(
-        (response) => {
-          console.log(response);
-        },
-        (error) => {
-          console.error(error);
-        }
-      );
-    // if (this.persistenceService.getInitialPage()){
-    //   this.getPersistenceData();  
-    // }
-    // else{
-    //   this.getData();
-    // }
+    // this.generalService.claimAuthorization('https://greengallery-b9ad4.web.app/', '')
+    //   .subscribe(
+    //     (response) => {
+    //       console.log(response);
+    //     },
+    //     (error) => {
+    //       console.error(error);
+    //     }
+    //   );
+    if (this.persistenceService.getInitialPage()){
+      this.getPersistenceData();  
+    }
+    else{
+      this.getData();
+    }
   }
 
   getData(){
+    this.isLoading = true
     this.generalService.obtenerDatos(1).subscribe(
       (data) => {
         this.plantList = data;
@@ -60,9 +64,11 @@ export class InitialPageComponent {
         this.pageSelected = 1;
         this.persistenceService.setInitialNumberPage(this.pageSelected);
         this.persistenceService.setInitialPage(this.plantList);
+        this.isLoading = false;
       },
       (error) => {
         console.error('Error en la solicitud:', error);
+        this.isLoading = false;
       });
   }
 
@@ -99,6 +105,7 @@ export class InitialPageComponent {
 
   addFavorites(plant: Datum){
     this.generalService.addFavorites(plant);
+    this.messageService.add({ severity: 'success', summary: 'Exito', detail: 'Agregado a Favoritos' });
   }
 
   extractLastPage(cadena: string) {
@@ -110,8 +117,10 @@ export class InitialPageComponent {
   receiveMessageFromChild(page: number) {
     this.pageSelected = page;
     this.persistenceService.setInitialNumberPage(this.pageSelected);
+    this.isLoading = true
     this.generalService.obtenerDatos(page).subscribe((data) => {
       this.plantList = data;
+      this.isLoading = false;
       this.persistenceService.setInitialPage(this.plantList);
     });
   }

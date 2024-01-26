@@ -1,4 +1,4 @@
-/* .cont{
+.cont{
     margin-top: 700px;
 }
 .flowers {
@@ -1311,7 +1311,7 @@
   .container * {
     -webkit-animation-play-state: paused !important;
             animation-play-state: paused !important;
-  } */
+  }
   
   /*# sourceMappingURL=main.css.map */
 
@@ -1336,7 +1336,7 @@
     background-position: 0%;
     width: 80%;
     margin: 10%;
-    font-size: 134px;
+    font-size: 110px;
     animation: clouds-moving infinite 220s;
     animation-fill-mode: forwards;
     animation-play-state: running;

@@ -4,20 +4,36 @@
   </div>
 </div>
 
-<div class="flex items-center justify-center rounded-md">
+<div *ngIf="!isLoading" class="flex items-center justify-center rounded-md">
   <div class="flex justify-center items-center w-full">
     <p class="cloud-text cloud-title">Family: {{familyName}}</p>
   </div>
 </div>
 
-<div class="grid grid-cols-3 gap-6 py-4 px-6">
+<div *ngIf="!isLoading" class="grid grid-cols-3 gap-6 py-4 px-6">
   <div *ngFor="let genus of genusData?.data" class="rounded-md my-3">
-    <p-card header="{{ genus?.name || '' }}">
-      <div class="mt-4 grid grid-cols-1 gap-3 justify-items-center items-center">
-        <p-button label="See Plants" (click)="onClickGenus(genus.slug)"></p-button>
-      </div>
+    <p-card>
+      <ng-template pTemplate="header">
+        <div class="grid grid-cols-1 py-3 bg-lime-400">
+          <div class="col-span-1">
+            <p class="text-cyan-900 uppercase text-center font-bold text-xl">{{ genus?.name || '' }}</p>
+          </div>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="body" class="body-card">
+        <div class="grid grid-cols-1 gap-3 justify-items-center items-center">
+          <p-button class="group-1 rounded-sm" label="See Plants" (click)="onClickGenus(genus.slug)"></p-button>
+        </div>
+      </ng-template>
     </p-card>
   </div>
 </div>
 
-<app-paginator [lastPage]="lastPage!" [pageSelected]="pageSelected!" (sendMessageEvent)="receiveMessageFromChild($event)"></app-paginator>
+<div *ngIf="isLoading" class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75 z-50">
+  <div class="flex flex-col items-center">
+    <p class="text-2xl text-white mb-4">Loading...</p>
+    <p-progressSpinner styleClass="w-16 h-16" strokeWidth="8" fill="var(--surface-ground)" animationDuration=".5s"></p-progressSpinner>
+  </div>
+</div>
+
+<app-paginator *ngIf="!isLoading" [lastPage]="lastPage!" [pageSelected]="pageSelected!" (sendMessageEvent)="receiveMessageFromChild($event)"></app-paginator>

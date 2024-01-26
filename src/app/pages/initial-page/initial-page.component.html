@@ -1,35 +1,47 @@
 
-<div class="body px-10">
+<div  class="body px-10">
 
   <div class="flex justify-center items-center mt-6">
     <p class="cloud-text cloud-title">Green Gallery</p>
   </div>
 
 
-  <div class="grid grid-cols-3 gap-6 py-4 px-6">
+  <div *ngIf="!isLoading" class="grid grid-cols-3 gap-6 py-4 px-6">
       <div *ngFor="let plant of plantList?.data" class="rounded-md my-3 border-2 border-white shadow-xl">
-        <p-card header="{{ plant.common_name || plant.synonyms[0] || plant.scientific_name || '' }}">
+        <p-card>
+          <ng-template pTemplate="header">
+            <div class="grid grid-cols-5 py-3 bg-lime-400">
+              <div class="col-span-4">
+                <p class="text-cyan-900 uppercase text-center font-bold text-xl cursor-pointer" (click)="onClickPlant(plant)">{{ plant.common_name || plant.synonyms[0] || plant.scientific_name || '' }}</p>
+              </div>
+              <div class="col-span-1 flex justify-center items-center">
+                <i class="pi pi-star-fill font-bold cursor-pointer" (click)="addFavorites(plant)"></i>
+              </div>
+            </div>
+            
+          </ng-template>
           <div *ngIf="plant.image_url" class="m-0 h-72 shadow-2xl border-2 border-gray-400 rounded-md">
-            <p-image [src]="plant.image_url" alt="Image"></p-image>
+            <p-image [src]="plant.image_url" alt="Image" (click)="onClickPlant(plant)" class="cursor-pointer" pTooltip="See more ..." tooltipEvent="hover" tooltipPosition="bottom"></p-image>
           </div>
 
           <div *ngIf="!plant.image_url" class="m-0 h-72 flex justify-center items-center">
-            <p class="transform rotate-45">No Image</p>
-          </div>
-          
-          <div class="mt-4 grid grid-cols-2 gap-3 justify-items-center items-center">
-            <p-button label="Favorite" (click)="addFavorites(plant)"></p-button>
-            <p-button label="Details" (click)="onClickPlant(plant)"></p-button>
+            <p class="transform rotate-45 text-3xl p-4 font-bold">No Image</p>
           </div>
         </p-card>
       </div>
   </div>
-  <app-paginator [lastPage]="lastPage!" [pageSelected]="pageSelected!" (sendMessageEvent)="receiveMessageFromChild($event)"></app-paginator>
+  <app-paginator *ngIf="!isLoading" [lastPage]="lastPage!" [pageSelected]="pageSelected!" (sendMessageEvent)="receiveMessageFromChild($event)"></app-paginator>
   <!-- <p-paginator [first]="first" [rows]="1" [totalRecords]="12" (onPageChange)="onPageChange($event)" [showJumpToPageDropdown]="true" [showPageLinks]="false"></p-paginator> -->
 
 </div>
 
+<div *ngIf="isLoading" class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75 z-50">
+  <div class="flex flex-col items-center">
+    <p class="text-2xl text-white mb-4">Loading...</p>
+    <p-progressSpinner styleClass="w-16 h-16" strokeWidth="8" fill="var(--surface-ground)" animationDuration=".5s"></p-progressSpinner>
+  </div>
+</div>
 
-
+<p-toast></p-toast>
 
 <app-plant-details [visible]="visible" [plantSelected]="plantSelected" [initialButton]="initialButton"></app-plant-details>

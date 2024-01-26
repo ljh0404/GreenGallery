@@ -12,14 +12,14 @@ export class DashboardComponent {
 
   ngOnInit(){
     console.log('Hola')
-    this.generalService.claimAuthorization('https://greengallery-b9ad4.web.app/', '')
-      .subscribe(
-        (response) => {
-          console.log(response);
-        },
-        (error) => {
-          console.error(error);
-        }
-      );
+    // this.generalService.claimAuthorization('https://greengallery-b9ad4.web.app/', '')
+    //   .subscribe(
+    //     (response) => {
+    //       console.log(response);
+    //     },
+    //     (error) => {
+    //       console.error(error);
+    //     }
+    //   );
   }
 }

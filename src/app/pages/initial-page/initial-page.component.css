@@ -19,17 +19,26 @@
     border-radius: 0.5rem;
 }
 
-::ng-deep .p-card .p-card-title{
-    color: #1a2e05;
-    text-shadow: -1px -1px 0 #a5f3fc, 1px -1px 0 #a5f3fc, -1px 1px 0 #a5f3fc, 1px 1px 0 #a5f3fc;
-    text-transform: uppercase;
-    text-align: center;
+::ng-deep .p-card .p-card-title {
+  color: #b64c86; /* Magenta */
+  text-shadow: 0 0 10px rgba(182, 76, 134, 0.7); /* Sombra magenta suave */
+  text-transform: uppercase;
+  text-align: center;
+  font-weight: bold; /* Opcional: Añade negrita para resaltar */
+  font-size: 1.4em; /* Opcional: Ajusta el tamaño de la fuente según tus preferencias */
 }
 
 ::ng-deep .p-ripple{
     background-color: #111827;
 }
 
+::ng-deep .group-1 .p-button{
+  border: 4px solid #6d6d6d
+}
+
+::ng-deep .group-1 .p-button:hover{
+  border: 4px solid #0aab01
+}
 
 @import url('https://fonts.googleapis.com/css?family=Coiny');
 
@@ -69,4 +78,8 @@ body {
   position: relative;
   font-size: 26px;
   text-align: center;
+}
+
+::ng-deep .pi-star-fill:hover{
+  color: rgb(158, 167, 33);
 }

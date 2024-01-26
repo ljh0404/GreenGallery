@@ -7,17 +7,25 @@
 
 <div class="grid grid-cols-3 gap-6 py-4 px-6">
   <div *ngFor="let plant of plantList" class="rounded-md my-3 border-2 border-white">
-    <p-card header="{{ plant.common_name || plant.synonyms[0] || '' }}">
+    <p-card>
+
+      <ng-template pTemplate="header">
+        <div class="grid grid-cols-5 py-3 bg-lime-400">
+          <div class="col-span-4">
+            <p class="text-cyan-900 uppercase text-center font-bold text-xl cursor-pointer" (click)="onClickPlant(plant)">{{ plant.common_name || plant.synonyms[0] || plant.scientific_name || '' }}</p>
+          </div>
+          <div class="col-span-1 flex justify-center items-center">
+            <i class="pi pi-star-fill font-bold cursor-pointer"></i>
+          </div>
+        </div>
+      </ng-template>
+
       <div *ngIf="plant.image_url" class="m-0 h-72">
-        <p-image [src]="plant.image_url" alt="Image"></p-image>
+        <p-image [src]="plant.image_url" alt="Image" (click)="onClickPlant(plant)"></p-image>
       </div>
 
       <div *ngIf="!plant.image_url" class="m-0 h-72 flex justify-center items-center">
-        <p class="transform rotate-45">No Image</p>
-      </div>
-      
-      <div class="mt-4 grid grid-cols-1 justify-items-center">
-        <p-button label="Details" (click)="onClickPlant(plant)"></p-button>
+        <p class="transform rotate-45 text-3xl p-4 font-bold">No Image</p>
       </div>
     </p-card>
   </div>

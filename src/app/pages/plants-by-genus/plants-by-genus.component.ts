@@ -18,6 +18,7 @@ export class PlantsByGenusComponent {
   pageSelected!: number;
   plantSelected!: RootObject2;
   visible: boolean = false;
+  isLoading : boolean = false;
 
   constructor(private generalService: GeneralServiceService, private router: Router, private activateRoute: ActivatedRoute){}
 
@@ -25,8 +26,9 @@ export class PlantsByGenusComponent {
     this.activateRoute.queryParams.subscribe(
       (params: Params) => {
         this.genusName = params['genus'];
-
+        this.isLoading = true;
         this.generalService.getPlantsByGenus('/api/v1/genus/'+this.genusName+'/plants', 1).subscribe(data => {
+          this.isLoading = false;
           this.plantsData = data;
           this.plants = data.data;
           this.lastPage = parseInt(this.extractLastPage(this.plantsData.links.last)!);
@@ -44,7 +46,9 @@ export class PlantsByGenusComponent {
 
   receiveMessageFromChild(page: number) {
     this.pageSelected = page;
+    this.isLoading = true;
     this.generalService.getPlantsByGenus('/api/v1/genus/'+this.genusName+'/plants', page).subscribe(data => {
+      this.isLoading = false;
       this.plantsData = data;
       this.plants = data.data;
     })

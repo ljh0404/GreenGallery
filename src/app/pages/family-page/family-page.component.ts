@@ -16,12 +16,15 @@ export class FamilyPageComponent {
   familiySelected!: Datum;
   lastPage!: number;
   pageSelected!: number;
+  isLoading: boolean = false
 
   constructor(private generalService: GeneralServiceService, private router: Router, private persistenceService: PersistenceService){}
 
   ngOnInit(){
     if (!this.persistenceService.getFamilyResult()){
+      this.isLoading = true
       this.generalService.getAllFamilies(1).subscribe(data => {
+        this.isLoading = false
         this.families = data;
         this.persistenceService.setFamilyResult(this.families);
         this.lastPage = this.extraerNumeroDePagina(this.families.links.last)!;
@@ -53,7 +56,9 @@ export class FamilyPageComponent {
 
   receiveMessageFromChild(page: number) {
     this.pageSelected = page;
+    this.isLoading = true;
     this.generalService.getAllFamilies(page).subscribe(data => {
+      this.isLoading = false;
       this.families = data;
       this.persistenceService.setFamilyResult(this.families);
     })

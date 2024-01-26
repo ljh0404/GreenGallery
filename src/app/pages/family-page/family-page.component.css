@@ -1,9 +1,7 @@
-::ng-deep .p-card .p-card-body{
-    background: linear-gradient(to bottom, rgb(119, 194, 119), rgb(212, 245, 219));
-}
-
-::ng-deep .p-card .p-card-body{
-    border-radius: 0.5rem;
+:host() ::ng-deep .p-card .p-card-body{
+  background: linear-gradient(to bottom, rgb(119, 194, 119), rgb(212, 245, 219));
+  border-radius: 0 0 0.5rem 0.5rem;
+  padding: 0;
 }
 
 @import url('https://fonts.googleapis.com/css?family=Coiny');
@@ -44,4 +42,23 @@ body {
   position: relative;
   font-size: 26px;
   text-align: center;
+}
+
+::ng-deep .p-card .p-card-title{
+  color: #1a2e05;
+  text-shadow: -1px -1px 0 #a5f3fc, 1px -1px 0 #a5f3fc, -1px 1px 0 #a5f3fc, 1px 1px 0 #a5f3fc;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+::ng-deep .p-ripple{
+  background-color: #111827;
+}
+
+::ng-deep .group-1 .p-button{
+border: 4px solid #6d6d6d
+}
+
+::ng-deep .group-1 .p-button:hover{
+border: 4px solid #0aab01
 }

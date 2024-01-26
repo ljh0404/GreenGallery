@@ -22,6 +22,11 @@ import { PlantsByGenusComponent } from './pages/plants-by-genus/plants-by-genus.
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { PaginatorComponent } from './components/paginator/paginator.component';
 import { InputNumberModule } from 'primeng/inputnumber';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { TooltipModule } from 'primeng/tooltip';
+
 
 @NgModule({
   declarations: [
@@ -49,9 +54,12 @@ import { InputNumberModule } from 'primeng/inputnumber';
     PaginatorModule,
     TabMenuModule,
     InputTextModule,
-    InputNumberModule
+    InputNumberModule,
+    ToastModule,
+    ProgressSpinnerModule,
+    TooltipModule
   ],
-  providers: [InitialPageComponent, FavoritePageComponent, SearchPageComponent, FamilyPageComponent, PaginatorComponent, PlantsByGenusComponent],
+  providers: [InitialPageComponent, FavoritePageComponent, SearchPageComponent, FamilyPageComponent, PaginatorComponent, PlantsByGenusComponent, MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
