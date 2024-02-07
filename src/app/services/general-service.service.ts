@@ -29,27 +29,27 @@ export class GeneralServiceService {
   constructor(private http: HttpClient) { }
 
   obtenerDatos(pageNumber: number): Observable<RootObject> {
-    return this.http.get<RootObject>(environment.url+this.apiUrl+ pageNumber);
+    return this.http.get<RootObject>('https://green-gallery-endpoints.onrender.com/plants/list?page='+pageNumber);
   }
 
   getSpecieData(specie: string) :Observable<RootObject2> {
-    return this.http.get<RootObject2>(environment.url+specie + this.apiUrl_specie)
+    return this.http.get<RootObject2>('https://green-gallery-endpoints.onrender.com/plants/species?specie='+specie)
   }
 
-  searchData(seachText:string, page: number) : Observable<SearchObject> {
-    return this.http.get<SearchObject>(environment.url+this.searchUrl+seachText+'&page='+ page);
+  searchData(searchText:string, page: number) : Observable<SearchObject> {
+    return this.http.get<SearchObject>('https://green-gallery-endpoints.onrender.com/plants/search?q='+searchText+'&page='+page);
   }
 
   getAllFamilies(page: number) :Observable<FamilyObject> {
-    return this.http.get<FamilyObject>(environment.url+this.familiesUrl+page);
+    return this.http.get<FamilyObject>('https://green-gallery-endpoints.onrender.com/families/list?page='+page);
   }
 
   getGenusByFamily(family: string, page: number) : Observable<GenusObject> {
-    return this.http.get<GenusObject>(family + this.genusUrl+ page);
+    return this.http.get<GenusObject>('https://green-gallery-endpoints.onrender.com/genus/genus-by-family?family='+family+'&page='+page);
   } 
 
   getPlantsByGenus(genus: string, page: number) :Observable<PlantsObject>{
-    return this.http.get<PlantsObject>(genus + this.genusUrl+ page);
+    return this.http.get<PlantsObject>('https://green-gallery-endpoints.onrender.com/plants/plants-by-genus?genus='+genus+'&page='+page);
   }
 
 

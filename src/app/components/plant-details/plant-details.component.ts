@@ -46,8 +46,8 @@ export class PlantDetailsComponent {
         this.initialPage.nextIndex = 0;
       }
 
-      this.initialPage.nextLink = this.initialPage.plantList.data[this.initialPage.nextIndex]?.links.plant;
-      this.initialPage.previousLink = this.initialPage.plantList.data[this.initialPage.previousIndex]?.links.plant;
+      this.initialPage.nextLink = this.initialPage.plantList.data[this.initialPage.nextIndex]?.slug;
+      this.initialPage.previousLink = this.initialPage.plantList.data[this.initialPage.previousIndex]?.slug;
     })
   }
   
@@ -66,8 +66,8 @@ export class PlantDetailsComponent {
         this.initialPage.nextIndex = 0;
       }
 
-      this.initialPage.nextLink = this.initialPage.plantList.data[this.initialPage.nextIndex]?.links.plant;
-      this.initialPage.previousLink = this.initialPage.plantList.data[this.initialPage.previousIndex]?.links.plant;
+      this.initialPage.nextLink = this.initialPage.plantList.data[this.initialPage.nextIndex]?.slug;
+      this.initialPage.previousLink = this.initialPage.plantList.data[this.initialPage.previousIndex]?.slug;
     })
   }
 

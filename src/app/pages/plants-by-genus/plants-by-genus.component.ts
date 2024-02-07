@@ -27,7 +27,7 @@ export class PlantsByGenusComponent {
       (params: Params) => {
         this.genusName = params['genus'];
         this.isLoading = true;
-        this.generalService.getPlantsByGenus('/api/v1/genus/'+this.genusName+'/plants', 1).subscribe(data => {
+        this.generalService.getPlantsByGenus(this.genusName, 1).subscribe(data => {
           this.isLoading = false;
           this.plantsData = data;
           this.plants = data.data;
@@ -47,7 +47,7 @@ export class PlantsByGenusComponent {
   receiveMessageFromChild(page: number) {
     this.pageSelected = page;
     this.isLoading = true;
-    this.generalService.getPlantsByGenus('/api/v1/genus/'+this.genusName+'/plants', page).subscribe(data => {
+    this.generalService.getPlantsByGenus(this.genusName, page).subscribe(data => {
       this.isLoading = false;
       this.plantsData = data;
       this.plants = data.data;

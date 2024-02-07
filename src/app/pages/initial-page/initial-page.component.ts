@@ -79,7 +79,7 @@ export class InitialPageComponent {
   }
 
   onClickPlant(plant: Datum){
-    this.generalService.getSpecieData(plant.links.plant).subscribe((data)=> {
+    this.generalService.getSpecieData(plant.slug).subscribe((data)=> {
       this.plantSelected = data;
       this.visible = true;
       this.nextIndex = this.plantList?.data.findIndex(element => element.id == plant.id) + 1 ;
@@ -92,16 +92,10 @@ export class InitialPageComponent {
         this.nextIndex = 0;
       }
 
-      this.nextLink = this.plantList?.data[this.nextIndex].links.plant;
-      this.previousLink = this.plantList?.data[this.previousIndex].links.plant;
+      this.nextLink = this.plantList?.data[this.nextIndex].slug;
+      this.previousLink = this.plantList?.data[this.previousIndex].slug;
     })
   }
-
-  // onPageChange(event: any) {
-  //   this.first = event.first;
-  //   this.page = event.page;
-  //   this.getData();
-  // }
 
   addFavorites(plant: Datum){
     this.generalService.addFavorites(plant);

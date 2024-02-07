@@ -23,7 +23,7 @@ export class GenusPageComponent {
       (params: Params) => {
         this.familyName = params['family'];
         this.isLoading = true;
-        this.generalService.getGenusByFamily('/api/v1/families/'+this.familyName+'/genus', 1).subscribe(data => {
+        this.generalService.getGenusByFamily(this.familyName, 1).subscribe(data => {
           this.isLoading = false;
           this.genusData = data;
           this.lastPage = parseInt(this.extractLastPage(this.genusData.links.last)!);
@@ -50,7 +50,7 @@ export class GenusPageComponent {
   receiveMessageFromChild(page: number) {
     this.pageSelected = page;
     this.isLoading = true;
-    this.generalService.getGenusByFamily('/api/v1/families/'+this.familyName+'/genus', page).subscribe(data => {
+    this.generalService.getGenusByFamily(this.familyName,page).subscribe(data => {
       this.isLoading = false;
       this.genusData = data;
     })
