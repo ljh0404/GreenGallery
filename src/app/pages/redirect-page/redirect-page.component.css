@@ -1,43 +1,43 @@
 ::ng-deep .p-tabmenu .p-tabmenu-nav .p-tabmenuitem .p-menuitem-link{
     background-color: white;
-    border-width: 0px 0px 0px 0px;
-    border-color: #8ab7ff;
+    border-width: 1px 1px 1px 1px;
+    border-color: #8f90ac;
     width: 100%;
     border-radius: 0.3rem;
-    border-color: 1px solid black;
     background: linear-gradient(to bottom, rgb(30, 104, 35), rgb(181, 255, 61));
+    color: black;
+}
+
+::ng-deep .p-tabmenu .p-tabmenu-nav .p-tabmenuitem.p-highlight .p-menuitem-link{
+    background: linear-gradient(to bottom, rgb(195, 180, 255), rgb(181, 255, 61));
+    color: rgb(4, 0, 114);
+    font-weight: bold;
+    width: 100%;
+    border-color: #8ab7ff;
 }
 
 ::ng-deep .p-tabmenu .p-tabmenu-nav .p-tabmenuitem .p-menuitem-link:hover {
     background: linear-gradient(to bottom, rgb(195, 180, 255), rgb(181, 255, 61));
 }
 
-::ng-deep .p-tabmenu .p-tabmenu-nav .p-tabmenuitem.p-highlight .p-menuitem-link{
-    background: linear-gradient(to bottom, rgb(195, 180, 255), rgb(181, 255, 61));
-    color: black;
-    width: 100%;
-    border-color: #8ab7ff;
-}
-
 ::ng-deep .p-tabmenu-nav{
+    flex-wrap: wrap;
     justify-content: space-evenly;
 }
 
 ::ng-deep .p-tabmenu .p-tabmenu-nav{
     background-color: transparent;
     border: none;
-    height: 70px;
 }
 
-::ng-deep .p-tabmenu .p-tabmenu-nav .p-tabmenuitem{
-    width: 100%;
+::ng-deep .p-tabmenu .p-tabmenu-nav .p-tabmenuitem {
+    width: 25%;
     text-align: center;
-    
 }
 
 ::ng-deep .p-tabmenu-nav .p-menuitem-text{
     width: 100%;
-    color: rgb(67, 67, 67);
+    color: rgb(47, 47, 47);
 }
 
 ::ng-deep .pi-fw{
@@ -45,5 +45,5 @@
 }
 
 ::ng-deep .pi{
-    font-size: 1.4rem;
+    display: none;
 }

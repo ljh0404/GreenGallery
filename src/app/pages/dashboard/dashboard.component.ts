@@ -10,16 +10,4 @@ export class DashboardComponent {
 
   constructor(private generalService: GeneralServiceService){}
 
-  ngOnInit(){
-    console.log('Hola')
-    // this.generalService.claimAuthorization('https://greengallery-b9ad4.web.app/', '')
-    //   .subscribe(
-    //     (response) => {
-    //       console.log(response);
-    //     },
-    //     (error) => {
-    //       console.error(error);
-    //     }
-    //   );
-  }
 }

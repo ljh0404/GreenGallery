@@ -33,7 +33,6 @@ export class PlantsByGenusComponent {
           this.plants = data.data;
           this.lastPage = parseInt(this.extractLastPage(this.plantsData.links.last)!);
           this.pageSelected = 1;
-          console.log(this.plants);
         })
       }
     )
@@ -55,7 +54,7 @@ export class PlantsByGenusComponent {
   }
 
   onClickPlant(plant: any){
-    this.generalService.getSpecieData(plant.links.plant).subscribe((data)=> {
+    this.generalService.getSpecieData(plant.slug).subscribe((data)=> {
       this.plantSelected = data;
       this.visible = true;
     })

@@ -2,11 +2,11 @@
 <div  class="body px-10">
 
   <div class="flex justify-center items-center mt-6">
-    <p class="cloud-text cloud-title">Green Gallery</p>
+    <p class="cloud-text cloud-title text-5xl xs:text-5xl sm:text-5xl md:text-5xl lg:text-6xl xl:text-7xl py-3">Green Gallery</p>
   </div>
 
 
-  <div *ngIf="!isLoading" class="grid grid-cols-3 gap-6 py-4 px-6">
+  <div *ngIf="!isLoading" class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6 py-4 px-6">
       <div *ngFor="let plant of plantList?.data" class="rounded-md my-3 border-2 border-white shadow-xl">
         <p-card>
           <ng-template pTemplate="header">
@@ -31,7 +31,6 @@
       </div>
   </div>
   <app-paginator *ngIf="!isLoading" [lastPage]="lastPage!" [pageSelected]="pageSelected!" (sendMessageEvent)="receiveMessageFromChild($event)"></app-paginator>
-  <!-- <p-paginator [first]="first" [rows]="1" [totalRecords]="12" (onPageChange)="onPageChange($event)" [showJumpToPageDropdown]="true" [showPageLinks]="false"></p-paginator> -->
 
 </div>
 

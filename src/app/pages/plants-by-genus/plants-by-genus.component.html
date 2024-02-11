@@ -1,27 +1,24 @@
 <div class="flex items-center justify-center rounded-md">
   <div class="flex justify-center items-center w-full mt-6">
-    <p class="cloud-text cloud-title">Plants by Genus</p>
+    <p class="cloud-text cloud-title text-5xl xs:text-5xl sm:text-5xl md:text-5xl lg:text-6xl xl:text-7xl">Plants by Genus</p>
   </div>
 </div>
 
 <div *ngIf="!isLoading" class="flex items-center justify-center rounded-md">
   <div class="flex justify-center items-center w-full">
-    <p class="cloud-text cloud-title">Genus: {{genusName}}</p>
+    <p class="cloud-text cloud-title text-5xl">Genus: {{genusName}}</p>
   </div>
 
 </div>
 
-<div *ngIf="!isLoading" class="grid grid-cols-3 gap-6 py-4 px-6">
-    <div *ngFor="let plant of plants" class="rounded-md my-3">
+<div *ngIf="!isLoading" class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6 py-4 px-6">
+    <div *ngFor="let plant of plants" class="rounded-md my-3 border-2 border-white">
       <p-card>
         <ng-template pTemplate="header">
           <div class="grid grid-cols-1 py-3 bg-lime-400">
             <div class="col-span-1">
               <p class="text-cyan-900 uppercase text-center font-bold text-xl cursor-pointer" (click)="onClickPlant(plant)">{{ plant.common_name || plant.synonyms[0] || plant.scientific_name || '' }}</p>
             </div>
-            <!-- <div class="col-span-1 flex justify-center items-center">
-              <i class="pi pi-star-fill font-bold cursor-pointer" (click)="addFavorites(plant)"></i>
-            </div> -->
           </div>
           
         </ng-template>

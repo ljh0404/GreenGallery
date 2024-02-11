@@ -12,12 +12,14 @@ import { PersistenceService } from 'src/app/services/persistence.service';
 })
 export class SearchPageComponent {
   searchText!: string;
+  showPaginator!: boolean;
   searchResult!: SearchObject;
   plantSelected!: RootObject2;
   visible: boolean = false;
   searchButton: boolean = true;
   lastPage!: number;
   pageSelected!: number;
+  isLoading: boolean = false;
 
   constructor(private generalService: GeneralServiceService, private persistenceService: PersistenceService){}
 
@@ -25,21 +27,31 @@ export class SearchPageComponent {
     if (this.persistenceService.getResultSearch() != undefined){
       this.searchResult = this.persistenceService.getResultSearch();
       this.searchText = this.persistenceService.getSearchText();
+      this.lastPage = parseInt(this.extractLastPage(this.searchResult.links.last)!);
+      this.pageSelected = this.persistenceService.getSearchPageNumberPage();
     }
   }
 
   onClickSearch(){
+    this.isLoading = true;
     this.generalService.searchData(this.searchText,1).subscribe(data => {
       this.searchResult = data;
       this.pageSelected = 1;
       this.lastPage = parseInt(this.extractLastPage(this.searchResult.links.last)!);
       this.persistenceService.setResultSearch(this.searchResult);
       this.persistenceService.setSearchText(this.searchText);
+      this.persistenceService.setSearchPageNumberPage(1);
+      this.isLoading = false;
+
+      if (this.searchResult.data.length == 0)
+        this.showPaginator = false;
+      else
+        this.showPaginator = true;
     });
   }
 
   onClickPlant(plant: Datum){
-    this.generalService.getSpecieData(plant.links.plant).subscribe((data)=> {
+    this.generalService.getSpecieData(plant.slug).subscribe((data)=> {
       this.plantSelected = data;
       this.visible = true;
     })
@@ -60,6 +72,7 @@ export class SearchPageComponent {
       this.lastPage = parseInt(this.extractLastPage(this.searchResult.links.last)!);
       this.persistenceService.setResultSearch(this.searchResult);
       this.persistenceService.setSearchText(this.searchText);
+      this.persistenceService.setSearchPageNumberPage(this.pageSelected);
     });
   }
 }

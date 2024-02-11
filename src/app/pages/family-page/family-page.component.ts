@@ -29,11 +29,14 @@ export class FamilyPageComponent {
         this.persistenceService.setFamilyResult(this.families);
         this.lastPage = this.extraerNumeroDePagina(this.families.links.last)!;
         this.pageSelected = 1;
+        this.persistenceService.setFamilyPageNumber(1);
       })
     }
     else{
       this.families = this.persistenceService.getFamilyResult();
-      console.log(this.families);
+      this.pageSelected = this.persistenceService.getFamilyPageNumber();
+      this.lastPage = this.extraerNumeroDePagina(this.families.links.last)!;
+      
     }
   }
 
@@ -61,6 +64,7 @@ export class FamilyPageComponent {
       this.isLoading = false;
       this.families = data;
       this.persistenceService.setFamilyResult(this.families);
+      this.persistenceService.setFamilyPageNumber(this.pageSelected);
     })
   }
 }

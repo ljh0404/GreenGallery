@@ -38,15 +38,7 @@ export class InitialPageComponent {
   constructor(private generalService: GeneralServiceService, private persistenceService: PersistenceService, private messageService: MessageService){}
   
   ngOnInit(){
-    // this.generalService.claimAuthorization('https://greengallery-b9ad4.web.app/', '')
-    //   .subscribe(
-    //     (response) => {
-    //       console.log(response);
-    //     },
-    //     (error) => {
-    //       console.error(error);
-    //     }
-    //   );
+
     if (this.persistenceService.getInitialPage()){
       this.getPersistenceData();  
     }

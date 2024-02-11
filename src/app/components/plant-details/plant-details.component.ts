@@ -20,6 +20,7 @@ export class PlantDetailsComponent {
   @Input() favoriteButton!: boolean;
   @Input() initialButton!: boolean;
   visible2: boolean = false;
+  isLoading: boolean = false;
 
 
   constructor(private initialPage: InitialPageComponent, private generalService: GeneralServiceService, private favoritePage: FavoritePageComponent, private searchPage: SearchPageComponent, private plantsByGenusPage: PlantsByGenusComponent){}
@@ -32,8 +33,7 @@ export class PlantDetailsComponent {
   }
 
   nextPlant(){
-    console.log('next',this.initialPage.nextLink);
-    console.log('previous',this.initialPage.previousLink);
+    this.isLoading = true;
     this.generalService.getSpecieData(this.initialPage.nextLink).subscribe((data)=> {
       this.plantSelected = data;
       this.initialPage.nextIndex = this.initialPage.nextIndex+1
@@ -48,12 +48,12 @@ export class PlantDetailsComponent {
 
       this.initialPage.nextLink = this.initialPage.plantList.data[this.initialPage.nextIndex]?.slug;
       this.initialPage.previousLink = this.initialPage.plantList.data[this.initialPage.previousIndex]?.slug;
+      this.isLoading = false;
     })
   }
   
   previousPlant(){
-    console.log('next',this.initialPage.nextLink);
-    console.log('previous',this.initialPage.previousLink);
+    this.isLoading = true;
     this.generalService.getSpecieData(this.initialPage.previousLink).subscribe((data)=> {
       this.plantSelected = data;
       this.initialPage.nextIndex = this.initialPage.nextIndex - 1
@@ -68,6 +68,7 @@ export class PlantDetailsComponent {
 
       this.initialPage.nextLink = this.initialPage.plantList.data[this.initialPage.nextIndex]?.slug;
       this.initialPage.previousLink = this.initialPage.plantList.data[this.initialPage.previousIndex]?.slug;
+      this.isLoading = false
     })
   }
 

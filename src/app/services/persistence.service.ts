@@ -12,6 +12,8 @@ export class PersistenceService {
 
   private initial = signal<RootObject>(undefined!);
   private initialNumber = signal<number>(0);
+  private searchNumberPage = signal<number>(0!);
+  private familyNumberPage = signal<number>(0!);
 
   getInitialPage(){
     return this.initial();
@@ -27,6 +29,19 @@ export class PersistenceService {
     this.initialNumber.set(data);
   }
 
+  getSearchPageNumberPage(){
+    return this.searchNumberPage();
+  }
+  setSearchPageNumberPage(data: number){
+    this.searchNumberPage.set(data);
+  }
+
+  getFamilyPageNumber(){
+    return this.familyNumberPage();
+  }
+  setFamilyPageNumber(data: number){
+    this.familyNumberPage.set(data);
+  }
   private searchText = signal<string>('');
 
   getSearchText(){

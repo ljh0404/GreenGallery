@@ -37,12 +37,10 @@ export class PaginatorComponent {
   }
   handleBlur() {
     this.pageSelected = this.pageAux;
-    console.log(this.pageSelected);
     this.sendMessageEvent.emit(this.pageSelected);
   }
 
   handleInputChange() {
-    console.log(this.pageSelected);
     if (this.pageSelected == null || this.pageSelected == 0){
       this.pageSelected = this.pageAux;
     }
@@ -50,11 +48,9 @@ export class PaginatorComponent {
       if (this.pageSelected > this.lastPage){
         this.pageSelected = this.lastPage;
         this.pageAux = this.pageSelected;
-        console.log(this.pageSelected);
       }
       else{
         this.pageAux = this.pageSelected;
-        console.log(this.pageSelected)
       }
     }
   }

@@ -1,11 +1,11 @@
 <div class="flex items-center justify-center rounded-md">
   <div class="flex justify-center items-center w-full mt-6">
-    <p class="cloud-text cloud-title">Family Page</p>
+    <p class="cloud-text cloud-title text-5xl xs:text-5xl sm:text-5xl md:text-5xl lg:text-6xl xl:text-7xl py-3">Family Page</p>
   </div>
 </div>
 
-<div *ngIf="!isLoading" class="grid grid-cols-3 gap-6 py-4 px-6">
-  <div *ngFor="let family of families?.data" class="rounded-md my-3">
+<div *ngIf="!isLoading" class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6 py-4 px-6">
+  <div *ngFor="let family of families?.data" class="rounded-md my-3 border-2 border-white">
     <p-card>
       <ng-template pTemplate="header">
         <div class="grid grid-cols-1 py-3 bg-lime-400">
