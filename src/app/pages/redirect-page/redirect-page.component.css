@@ -43,7 +43,7 @@
 ::ng-deep .pi-fw{
     width: 3rem;
 }
-
-::ng-deep .pi{
+/* 
+:host() ::ng-deep .pi{
     display: none;
-}
+} */
