@@ -29,7 +29,7 @@
       </ng-template>
 
       <div *ngIf="plant.image_url" class="m-0 h-72">
-        <p-image [src]="plant.image_url" alt="Image" (click)="onClickPlant(plant)"></p-image>
+        <p-image [src]="plant.image_url" alt="Image" (click)="onClickPlant(plant)" class="cursor-pointer"></p-image>
       </div>
 
       <div *ngIf="!plant.image_url" class="m-0 h-72 flex justify-center items-center">
